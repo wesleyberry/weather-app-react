@@ -8,12 +8,13 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
+import Grid from '@material-ui/core/Grid';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const useStyles = makeStyles(theme => ({
     root: {
-      maxWidth: 400,
+      maxWidth: 300,
       flexGrow: 1,
     },
     header: {
@@ -22,13 +23,6 @@ const useStyles = makeStyles(theme => ({
       height: 50,
       paddingLeft: theme.spacing(4),
       backgroundColor: theme.palette.background.default,
-    },
-    img: {
-      height: 255,
-      display: 'block',
-      maxWidth: 400,
-      overflow: 'hidden',
-      width: '100%',
     },
 }));
 
@@ -71,7 +65,7 @@ const useStyles = makeStyles(theme => ({
         ];
 
         return (
-            <div className={classes.root}>
+            <Grid className={classes.root} item xs={6}>
             <Paper square elevation={0} className={classes.header}>
                 <Typography>{options[activeStep].label}</Typography>
             </Paper>
@@ -112,7 +106,7 @@ const useStyles = makeStyles(theme => ({
                 </Button>
                 }
             />
-        </div>
+        </Grid>
     );
 }
   

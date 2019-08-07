@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import API from '../utils/Api';
-import Grid from '@material-ui/core/Grid';
+import CustomGrid from '../Components/Grid/Grid.js';
 import Stepper from '../Components/Stepper/Stepper.js';
 import Table from '../Components/Table/Table.js';
+import AppBar from '../Components/AppBar/AppBar.js';
+import City from '../Components/City/City.js';
+import Description from '../Components/Description/Description.js';
+import Grid from "@material-ui/core/Grid";
 
 class Page extends Component {
     state = {
+        search: "",
         city: "",
+        main: "",
         description: "",
         icon: "",
         temperature: "",
@@ -32,11 +38,15 @@ class Page extends Component {
     };
 
     hitAPI = city => {
+        if(this.state.search === "") {
+            city = 'austin';
+        } 
+
         API.hitAPI('austin')
         .then(res => {
-            console.log(res.data);
             this.setState({
                 city: res.data.name,
+                main: res.data.weather[0].main,
                 description: res.data.weather[0].description,
                 icon: res.data.weather[0].icon,
                 temperature: res.data.main.temp,
@@ -52,31 +62,49 @@ class Page extends Component {
         }).catch(err => console.log(err));
     };
 
+    // checkMain = this.state.main => {
+    //     var main = this.state.main;
+    //     if(main === "Thunderstorm") {
+
+    //     }
+    // };
+
     render() {
         return(
-            <Grid
-                container
-                direction="column"
-                justify="center"
-                alignItems="center"
-            >
-                <div>Hello World</div>
-                <div>{this.state.city}</div>
-                <div>{this.state.description}</div>
-                <div>{this.state.icon}</div>
-                <div>{this.state.temperature}</div>
-                <div>{this.state.windSpeed}</div>
-                <Stepper
-                humidity={this.state.humidity}
-                visibility={this.state.visibility}
-                low={this.state.low}
-                high={this.state.high}
-                />
-                <Table 
-                sunrise={this.state.sunrise}
-                sunset={this.state.sunset}
-                />
-            </Grid>
+            <div>
+                <AppBar />
+                <CustomGrid>
+                    <Grid
+                        container
+                        direction="row">
+                        <City 
+                            city={this.state.city} 
+                        />
+                    </Grid>
+                    <Grid
+                        container
+                        direction="row"
+                        justify="center"
+                        alignItems="center"
+                        spacing={1}
+                    >
+                        <Description 
+                            description={this.state.description}
+                            icon={this.state.icon}
+                        />
+                        <Stepper
+                        humidity={this.state.humidity}
+                        visibility={this.state.visibility}
+                        low={this.state.low}
+                        high={this.state.high}
+                        />
+                    </Grid>
+                    <Table 
+                    sunrise={this.state.sunrise}
+                    sunset={this.state.sunset}
+                    />
+                </CustomGrid>
+            </div>
         );
     };
 }
