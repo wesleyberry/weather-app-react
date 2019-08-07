@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import API from '../utils/Api';
 import Grid from '@material-ui/core/Grid';
 import Stepper from '../Components/Stepper/Stepper.js';
+import Table from '../Components/Table/Table.js';
 
 class Page extends Component {
     state = {
@@ -18,9 +19,13 @@ class Page extends Component {
         sunset: ""
     };
 
-    componentDidMount() {
+    componentWillMount() {
         this.hitAPI();
     };
+
+    // componentDidMount() {
+    //     this.hitAPI();
+    // };
 
     checkState() {
         // console.log(this.state);
@@ -29,6 +34,7 @@ class Page extends Component {
     hitAPI = city => {
         API.hitAPI('austin')
         .then(res => {
+            console.log(res.data);
             this.setState({
                 city: res.data.name,
                 description: res.data.weather[0].description,
@@ -60,13 +66,15 @@ class Page extends Component {
                 <div>{this.state.icon}</div>
                 <div>{this.state.temperature}</div>
                 <div>{this.state.windSpeed}</div>
-                <div>{this.state.sunrise}</div>
-                <div>{this.state.sunset}</div>
                 <Stepper
                 humidity={this.state.humidity}
                 visibility={this.state.visibility}
                 low={this.state.low}
                 high={this.state.high}
+                />
+                <Table 
+                sunrise={this.state.sunrise}
+                sunset={this.state.sunset}
                 />
             </Grid>
         );
