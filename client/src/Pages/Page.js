@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import API from '../utils/Api';
+import Grid from '@material-ui/core/Grid';
+import Stepper from '../Components/Stepper/Stepper.js';
 
 class Page extends Component {
     state = {
@@ -46,20 +48,27 @@ class Page extends Component {
 
     render() {
         return(
-            <div>
+            <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+            >
                 <div>Hello World</div>
                 <div>{this.state.city}</div>
                 <div>{this.state.description}</div>
                 <div>{this.state.icon}</div>
                 <div>{this.state.temperature}</div>
                 <div>{this.state.windSpeed}</div>
-                <div>{this.state.humidity}</div>
-                <div>{this.state.visibility}</div>
-                <div>{this.state.high}</div>
-                <div>{this.state.low}</div>
                 <div>{this.state.sunrise}</div>
                 <div>{this.state.sunset}</div>
-            </div>
+                <Stepper
+                humidity={this.state.humidity}
+                visibility={this.state.visibility}
+                low={this.state.low}
+                high={this.state.high}
+                />
+            </Grid>
         );
     };
 }
