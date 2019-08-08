@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
@@ -12,6 +11,9 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  header: {
+    color: 'red'
+  }
 }));
 
 export default function FullWidthGrid({
@@ -22,9 +24,9 @@ export default function FullWidthGrid({
   return (
     <Grid item xs={7}>
       <div className={classes.root}>
-          <Paper className={classes.paper}>
-              {city}
-          </Paper>
+          {/* <Paper className={classes.paper}> */}
+              <h1 className={classes.header}>{city}</h1>
+          {/* </Paper> */}
       </div>
     </Grid>
   );

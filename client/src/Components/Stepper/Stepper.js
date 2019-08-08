@@ -9,6 +9,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import Grid from '@material-ui/core/Grid';
+import './Stepper.css';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -49,6 +50,10 @@ const useStyles = makeStyles(theme => ({
             setActiveStep(step);
         }
 
+        const convertKToF = someTemperature => {
+            return ((9/5) * (someTemperature - 273) + 32).toFixed(1);
+        };
+
         const options = [
             { 
                 label: "Humidity",
@@ -79,8 +84,16 @@ const useStyles = makeStyles(theme => ({
                 <div key={step.label}>
                     {Math.abs(activeStep - index) <= 2 ? (
                     [
-                    <h3>{step.stats[0]}</h3>,
-                    (step.stats[1] ? <h3>{step.stats[1]}</h3> : null)
+                    <h3>
+                        {step.stats[0]} 
+                        {step.label === 'Humidity' ? <span> humid</span> : 
+                            (step.label === 'Visibility' ? <span> Visible</span> : <span> F</span>)
+                        }
+                    </h3>,
+                        (step.stats[1] ? 
+                    <h3>
+                        {convertKToF(low)}<span> F</span>
+                    </h3> : null)
                     ]
                     ) : null}
                 </div>

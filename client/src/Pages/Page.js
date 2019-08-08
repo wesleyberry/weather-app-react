@@ -7,6 +7,7 @@ import AppBar from '../Components/AppBar/AppBar.js';
 import City from '../Components/City/City.js';
 import Description from '../Components/Description/Description.js';
 import Grid from "@material-ui/core/Grid";
+import './Page.css';
 
 class Page extends Component {
     state = {
@@ -44,6 +45,7 @@ class Page extends Component {
 
         API.hitAPI('austin')
         .then(res => {
+            console.log(res.data);
             this.setState({
                 city: res.data.name,
                 main: res.data.weather[0].main,
