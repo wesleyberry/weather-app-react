@@ -50,9 +50,7 @@ const useStyles = makeStyles(theme => ({
             setActiveStep(step);
         }
 
-        const convertKToF = someTemperature => {
-            return ((9/5) * (someTemperature - 273) + 32).toFixed(1);
-        };
+        const convertKToF = someTemperature => ((9/5) * (someTemperature - 273) + 32).toFixed(1);
 
         const options = [
             { 
@@ -65,7 +63,7 @@ const useStyles = makeStyles(theme => ({
             },
             {
                 label: "Highs and Lows", 
-                stats: [high, low]
+                stats: [convertKToF(high), convertKToF(low)]
             }
         ];
 
@@ -86,13 +84,13 @@ const useStyles = makeStyles(theme => ({
                     [
                     <h3>
                         {step.stats[0]} 
-                        {step.label === 'Humidity' ? <span> humid</span> : 
-                            (step.label === 'Visibility' ? <span> Visible</span> : <span> F</span>)
+                        {step.label === 'Humidity' ? <span>%</span> : 
+                            (step.label === 'Visibility' ? <span> Meters</span> : <span>°F</span>)
                         }
                     </h3>,
                         (step.stats[1] ? 
                     <h3>
-                        {convertKToF(low)}<span> F</span>
+                        {step.stats[1]}<span>°F</span>
                     </h3> : null)
                     ]
                     ) : null}
