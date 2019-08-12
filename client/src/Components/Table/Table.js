@@ -37,7 +37,7 @@ const convertDateMorning = someDate => {
     someDate = JSON.stringify(timestamp.toDate(someDate));
     someDate = someDate.slice(12, 17);
     someDate = someDate.split(":");
-    someDate = (parseFloat(someDate[0]) - 5) + ":" + someDate[1] + " AM";
+    someDate = (parseFloat(someDate[0]) - 5) + someDate[1];
     return someDate;
 };
 
@@ -59,7 +59,7 @@ const convertDateEvening = someDate => {
     } else if(someDate[0] == 5) {
         someDate[0] = 24;
     }
-    someDate = (parseFloat(someDate[0]) - 5) + ":" + someDate[1] + " PM";
+    someDate = (parseFloat(someDate[0]) - 5) + someDate[1];
     return someDate;
 };
 

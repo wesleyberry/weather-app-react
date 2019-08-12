@@ -43,7 +43,7 @@ class Page extends Component {
             city = 'austin';
         } 
 
-        API.hitAPI('dallas')
+        API.hitAPI('austin')
         .then(res => {
             console.log(res.data);
             this.setState({
